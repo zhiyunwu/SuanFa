@@ -1,0 +1,34 @@
+//这题要是用桶排，直接一亿个桶 系统会蹦
+//注意数组开的大小，就是因为数组大小看错了老过不去
+//为了减少运行时间 ，使用了快排 
+#include <stdio.h>
+#include <string.h>
+int cmpfunc(const void *a,const void *b){ 
+	return (*(int*)a-*(int *)b);//这样写可以不限定 传递参数的类型 
+}
+int main() {
+	int n;
+	scanf("%d",&n);
+	int i,j,count;
+	int a[200005]={0};
+	int b[200005]={0};
+	for(i=0;i<n;i++) 
+		scanf("%d",&a[i]);
+	qsort(a,n,sizeof(int),cmpfunc);
+	count=1;
+	for(i=0;i<n-1;i++) {
+		if(a[i]!=a[i+1]) {
+			printf("%d %d\n",a[i],count);
+			count=1;
+		} else {
+			count++;
+		}
+	}
+	if(a[n-1]!=a[n-2])
+	{
+		printf("%d %d\n",a[n-1],1);
+	} else {
+		printf("%d %d\n",a[n-1],count);
+	}
+	return 0; 
+}
